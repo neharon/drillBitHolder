@@ -1,4 +1,4 @@
-//  Parametric stackable DIN-rail mount drill bit holder
+// Parametric stackable DIN-rail mount drill bit holder
 // It is licensed under the Creative Commons - GNU GPL license.
 // © 2014-2015 by Petr Mironkin neharon@ya.ru
 // If you like this holder you can donate, please use
@@ -90,10 +90,13 @@ union()
                                     translate([drill_bit_wall+din_rail_ledge+drill_bit_screw_hole_diameter+drill_bit_square_hole_X/2+(drill_bit_square_hole_X+drill_bit_wall)*i,
                                                drill_bit_wall+din_rail_ledge+k*(drill_bit_screw_hole_diameter+(drill_bit_square_hole_Y+drill_bit_wall)*drill_bit_square_holes_Y_count),
                                                drill_bit_height-text_height+tolerance])
-                                        rotate([0,0,-90])
+                                        rotate([nuber_textX_rotation[0],nuber_textX_rotation[1],nuber_textX_rotation[2] + 180*k])
                                             linear_extrude(height = text_height) 
-                                                text(text=str(1+i+text_x_first_number-1),font=text_font,size=text_size, valign ="center", halign ="center");
-                
+                                                if(text_x_mode == "signs"){
+                                                     text(text=text_x_signs[i],font=text_font,size=text_size, valign ="center", halign ="center");
+                                                }else{
+                                                    text(text=str(i+text_x_first_number),font=text_font,size=text_size, valign ="center", halign ="center");
+                                                }
 //Y
                         translate(nuber_textY_offset)
                             for(l=[0:1])
@@ -102,8 +105,12 @@ union()
                                                drill_bit_wall+din_rail_ledge+drill_bit_screw_hole_diameter+drill_bit_square_hole_Y/2+(drill_bit_square_hole_Y+drill_bit_wall)*m,
                                                drill_bit_height-text_height+tolerance])
                                         rotate([0,0,-90])
-                                            linear_extrude(height = text_height) 
-                                                text(text=str(drill_bit_square_holes_Y_count-m-1),font=text_font,size=text_size, valign ="center", halign ="center");
+                                            linear_extrude(height = text_height)
+                                                if(text_y_mode == "signs"){
+                                                    text(text=text_y_signs[drill_bit_square_holes_Y_count-m-1],font=text_font,size=text_size, valign ="center", halign ="center");
+                                                }else{ 
+                                                    text(text=str(drill_bit_square_holes_Y_count-m-1),font=text_font,size=text_size, valign ="center", halign ="center");
+                                                }
                     }
 //fantom cleare
                     cube([din_rail_ledge,din_rail_ledge,drill_bit_height+tolerance]);
@@ -115,14 +122,15 @@ union()
             for(t=[0:len(signs)-1])
                 translate([drill_bit_wall+din_rail_ledge+drill_bit_screw_hole_diameter+drill_bit_square_hole_X/2+(drill_bit_square_hole_X+drill_bit_wall)*(signs[t] [0] [0]),
                            drill_bit_wall+din_rail_ledge+drill_bit_screw_hole_diameter+drill_bit_square_hole_Y/2+(drill_bit_square_hole_Y+drill_bit_wall)*(drill_bit_square_holes_Y_count - 1 - (signs[t] [0] [1])),
-                           drill_bit_bottom_wall_thickness-tolerance])
+                           drill_bit_height-tolerance])
                     rotate(signs_text_rotation)
-                        linear_extrude(height = text_height) 
+                        linear_extrude(height = signs_text_height) 
                             text(text=signs[t] [1],font=signs_text_font,size=signs_text_size,valign ="center", halign ="center");
 }
 
+
 module dinRailMountVert(){
-tolCount=4;
+tolCount=din_rail_mounts_dovetail_tolerance_multiplier;
 translate([din_rail_ledge,din_rail_ledge+tolerance,-tolCount/2*tolerance])
 	rotate([90,0,0])		
   union(){
@@ -133,6 +141,7 @@ translate([din_rail_ledge,din_rail_ledge+tolerance,-tolCount/2*tolerance])
         prism(drill_bit_height+tolCount*tolerance,din_rail_ledge+tolCount*tolerance ,din_rail_ledge+tolCount*tolerance );
   }
 }
+
 
 //I don't now who is prism module Autor, but lot of thanks! Mirok.
 //Draw a prism based on a
