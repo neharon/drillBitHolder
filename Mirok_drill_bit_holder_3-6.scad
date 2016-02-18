@@ -8,6 +8,7 @@ include <Mirok_drill_bit_holder.scad>;
 
 //if you need more acuracy dovetail joint use a little less tolerance
 tolerance= +0.08; 
+din_rail_mounts_dovetail_tolerance_multiplier=10; //Increase this param for easy dovetail joining
 
 //DIN rail and dovetail params
 din_rail_mount_width=35;
@@ -28,7 +29,7 @@ drill_bit_length_din_rail_count = 3;
 drill_bit_width_din_rail_count = 2;
 drill_bit_height = 11;
 drill_bit_bottom_wall_thickness = 2.3;
-drill_bit_wall = 6;
+drill_bit_wall=6;
 drill_bit_screw_hole_diameter = 5;
 drill_bit_square_holes_X_count = 4;
 drill_bit_square_holes_Y_count = 10;
@@ -65,15 +66,6 @@ nuber_textX_offset = [0,0,0]; //Change this for move numbers
 nuber_textY_offset = [0,0,0];
 
 
-//signs text param
-signs_text_size = 5;
-// signs on top of plate
-signs_text_offset=[0,-drill_bit_square_hole_Y/2-drill_bit_wall/2,drill_bit_holes_depth];
-// signs in holes
-//signs_text_offset=[0,0,0];
-signs_text_rotation=[0,0,180];
-signs_text_font= "Bodoni MT:style=Bold";
- 
 signs=signs_3_6; //See  <Mirok_drill_bit_holder_signs.scad> for signs content
 
      

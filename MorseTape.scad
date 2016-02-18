@@ -1,4 +1,8 @@
-// Morse tape
+// Morse tape module
+// It is licensed under the Creative Commons - GNU GPL license.
+// © 2015 by Petr Mironkin neharon@ya.ru
+// If you like this holder you can donate, please use
+// https://www.paypal.me/mirok
 
 tolerance=0.01;
 //Morse Tape Params (plan: https://upload.wikimedia.org/wikipedia/commons/9/99/Morse_Taper.png) 
@@ -13,13 +17,16 @@ MT_Params=[
 [6,        19.180, 	    63.348, 	63.8, 	53.9, 	24, 	52.4, 	50, 	51, 	54.6, 	182, 	    190, 	    210,    	218,    	188,    	177,    40,         13,     19,],
 [7,        19.231, 	    83.058,     0,      0,      0,      0,      0,      0,      0,      0,          0,          0,           0,         0,         0] 													
 ];
-dx = 0;
+
+//test code
 for(n=[0:6]){
     translate([(MT_Params[n][3]+40)*n,0,0])
         mt(n);
 }
 
+//build morse tape number N
 module mt(N){
+    translate([0,0,-MT_Params[N][13]])
     difference(){
         union(){
     d1=MT_Params[N][6]-MT_Params[N][17]/MT_Params[N][1];
@@ -31,11 +38,12 @@ module mt(N){
             for(i=[1,-1]){
                 translate([i*MT_Params[N][18]/2+(i-1)*MT_Params[N][16]/2,-MT_Params[N][3]/2,-tolerance])
                     cube([MT_Params[N][16],MT_Params[N][3],MT_Params[N][16]-MT_Params[N][17]]);
-                    translate([i*MT_Params[N][18]/2+MT_Params[N][17]+(i-1)*MT_Params[N][17],MT_Params[N][3]/2,,MT_Params[N][16]-MT_Params[N][17]])
+                translate([i*MT_Params[N][18]/2+MT_Params[N][17]+(i-1)*MT_Params[N][17],MT_Params[N][3]/2,,MT_Params[N][16]-MT_Params[N][17]])
                     rotate([90,0,0])
-                    cylinder($tn = 100, h =MT_Params[N][3],r=MT_Params[N][17]);
-                    
-                
+                        cylinder($tn = 100, h =MT_Params[N][3],r=MT_Params[N][17]);
+                translate([0,0,,-MT_Params[N][7]/2])   
+                    rotate([i*8.2,0,0])
+                        cube([MT_Params[N][18]+tolerance,MT_Params[N][7]*1.2,MT_Params[N][7]],center = true);
             }
         }
     }
