@@ -64,8 +64,10 @@ text_height = 0.5;
 text_x_first_number = 7;
  text_x_signs = ["0",".25",".5",".75"];
 
-// "signs" - X signs use text_x_signs array; "number" - numerical signs, starting from text_x_first_number
+// "signs" - signs use text_{x,y}_signs array; "number" - numerical signs, starting from text_x_first_number
 text_x_mode = "number"; 
+text_y_mode = "number";
+
 nuber_textX_offset = [0,0,0]; //Change this for move numbers
 nuber_textX_rotation = [0,0,0];
 nuber_textX_offset = [0,0,0];
@@ -94,8 +96,8 @@ number_color = "white";
 
 
 drill_bit_holder_mount();
-translate([0,drill_bit_length-din_rail_ledge,0])
+/*translate([0,drill_bit_length-din_rail_ledge,0])
 drill_bit_holder_mount();
 translate([drill_bit_width-din_rail_ledge,drill_bit_length-din_rail_ledge,0])
 drill_bit_holder_mount();
-
+*/
