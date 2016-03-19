@@ -62,11 +62,30 @@ text_size = 7;
 text_font= "Liberation Sans:style=Bold";
 text_height = 0.5;
 text_x_first_number = 3;
+
+// "signs" - signs use text_{x,y}_signs array; "number" - numerical signs, starting from text_x_first_number
+text_x_mode = "number"; 
+text_y_mode = "number";
+
 nuber_textX_offset = [0,0,0]; //Change this for move numbers
+nuber_textX_rotation = [0,0,0];
 nuber_textY_offset = [0,0,0];
 
 
+
+
+
 signs=signs_3_6; //See  <Mirok_drill_bit_holder_signs.scad> for signs content
+//signs text param
+signs_text_size = 5;
+// signs on top of plate
+signs_text_offset=[  0,-drill_bit_square_hole_Y/2-drill_bit_wall + min(drill_bit_square_hole_X,drill_bit_square_hole_Y),0];
+// signs in holes
+//signs_text_offset=[0,0,0];
+signs_text_rotation=[0,0,0];
+signs_text_font= "Bodoni MT:style=Bold";
+signs_text_height = 0.3;
+
 
      
 //color params

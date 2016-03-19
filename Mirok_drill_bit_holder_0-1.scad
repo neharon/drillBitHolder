@@ -24,7 +24,7 @@ din_rail_mounts_ZY_magical_param=23;
 
 
 //drill bit holder params
-drill_bit_bottom_wall_flag = true; // false -  top plate; true -  bottom plate
+drill_bit_bottom_wall_flag = false; // false -  top plate; true -  bottom plate
 drill_bit_length_din_rail_count = 3;
 drill_bit_width_din_rail_count = 2;
 drill_bit_height = 11;

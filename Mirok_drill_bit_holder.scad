@@ -6,14 +6,14 @@
 
 
 include <Mirok_drill_bit_holder_signs.scad>;
-
+//include <Mirok_drill_bit_holder_0-1.scad>; // for test only
 
 //Base module. Include it.
 module drill_bit_holder_mount()
 {
-echo(str("drill_bit_square_hole_X = ",drill_bit_square_hole_X));
-echo(str("drill_bit_square_hole_Y = ",drill_bit_square_hole_Y));
-echo(str("drill_bit_holes_depth = ",drill_bit_holes_depth));
+//echo(str("drill_bit_square_hole_X = ",drill_bit_square_hole_X));
+//echo(str("drill_bit_square_hole_Y = ",drill_bit_square_hole_Y));
+//echo(str("drill_bit_holes_depth = ",drill_bit_holes_depth));
 
 union()
 	difference(){
@@ -34,7 +34,7 @@ union()
                                 for(i=[0,1])
                                     translate([-tolerance,
                                                 din_rail_ledge,
-                                                i*drill_bit_height+(i*2-1)*tolerance])
+                                                i*drill_bit_height+(i*2-1)*din_rail_mounts_dovetail_tolerance_multiplier*tolerance])
                                         rotate([0,i*90,-90])
                                             prism(drill_bit_width+2*tolerance,din_rail_ledge ,din_rail_ledge );
 // din rail mounts Y
@@ -44,7 +44,7 @@ union()
                                 for(i=[0,1])
                                      translate([din_rail_ledge,
                                                 drill_bit_length+tolerance,
-                                                i*drill_bit_height+(i*2-1)*tolerance])
+                                                i*drill_bit_height+(i*2-1)*din_rail_mounts_dovetail_tolerance_multiplier*tolerance])
                                             rotate([0,i*90,180])
                                                 prism(drill_bit_length+2*tolerance,din_rail_ledge ,din_rail_ledge );
 // din rail mounts ZX
